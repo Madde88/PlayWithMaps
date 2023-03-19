@@ -1,0 +1,157 @@
+{
+  "format": 1,
+  "restore": {
+    "/Users/madde/Projects/PlayWithMaps/MigrationCreator/MigrationCreator.csproj": {}
+  },
+  "projects": {
+    "/Users/madde/Projects/PlayWithMaps/MigrationCreator/MigrationCreator.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/madde/Projects/PlayWithMaps/MigrationCreator/MigrationCreator.csproj",
+        "projectName": "MigrationCreator",
+        "projectPath": "/Users/madde/Projects/PlayWithMaps/MigrationCreator/MigrationCreator.csproj",
+        "packagesPath": "/Users/madde/.nuget/packages/",
+        "outputPath": "/Users/madde/Projects/PlayWithMaps/MigrationCreator/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/madde/NuGet.Config",
+          "/Users/madde/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "/Users/madde/Documents/Progress/Telerik_UI_for_NET_MAUI_3.0.0/Packages": {},
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {
+              "/Users/madde/Projects/PlayWithMaps/PlayWithMapsShared/PlayWithMapsShared.csproj": {
+                "projectPath": "/Users/madde/Projects/PlayWithMaps/PlayWithMapsShared/PlayWithMapsShared.csproj"
+              }
+            }
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "dependencies": {
+            "Microsoft.EntityFrameworkCore": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Sqlite": {
+              "target": "Package",
+              "version": "[7.0.4, )"
+            },
+            "Microsoft.EntityFrameworkCore.Tools": {
+              "include": "Runtime, Build, Native, ContentFiles, Analyzers, BuildTransitive",
+              "suppressParent": "All",
+              "target": "Package",
+              "version": "[7.0.4, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "downloadDependencies": [
+            {
+              "name": "Microsoft.AspNetCore.App.Runtime.osx-arm64",
+              "version": "[7.0.4, 7.0.4]"
+            },
+            {
+              "name": "Microsoft.NETCore.App.Runtime.osx-arm64",
+              "version": "[7.0.4, 7.0.4]"
+            }
+          ],
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+        }
+      },
+      "runtimes": {
+        "osx-arm64": {
+          "#import": []
+        }
+      }
+    },
+    "/Users/madde/Projects/PlayWithMaps/PlayWithMapsShared/PlayWithMapsShared.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/Users/madde/Projects/PlayWithMaps/PlayWithMapsShared/PlayWithMapsShared.csproj",
+        "projectName": "PlayWithMapsShared",
+        "projectPath": "/Users/madde/Projects/PlayWithMaps/PlayWithMapsShared/PlayWithMapsShared.csproj",
+        "packagesPath": "/Users/madde/.nuget/packages/",
+        "outputPath": "/Users/madde/Projects/PlayWithMaps/PlayWithMapsShared/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/Users/madde/NuGet.Config",
+          "/Users/madde/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net7.0"
+        ],
+        "sources": {
+          "/Users/madde/Documents/Progress/Telerik_UI_for_NET_MAUI_3.0.0/Packages": {},
+          "/usr/local/share/dotnet/library-packs": {},
+          "https://api.nuget.org/v3/index.json": {},
+          "https://pkgs.dev.azure.com/dnceng/public/_packaging/dotnet6/nuget/v3/index.json": {}
+        },
+        "frameworks": {
+          "net7.0": {
+            "targetAlias": "net7.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "warnAsError": [
+            "NU1605"
+          ]
+        }
+      },
+      "frameworks": {
+        "net7.0": {
+          "targetAlias": "net7.0",
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
