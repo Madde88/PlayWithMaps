@@ -6,6 +6,7 @@ namespace PlayWithMaps;
 public partial class MainPage : ContentPage
 {
     Location myLocation;
+    Location myLocationFilterd;
     List<Location> locations = new();
     List<CustomPin> pins = new();
     bool isGettingLocation;
@@ -15,10 +16,11 @@ public partial class MainPage : ContentPage
     ImageSource customPinImage = ImageSource.FromFile("pin.png");
 
     private MainPageViewModel viewModel => BindingContext as MainPageViewModel;
-
-    public MainPage(MainPageViewModel viewModel)
+    private IFilterLocation filterLocation;
+    public MainPage(MainPageViewModel viewModel, IFilterLocation filterLocation)
     {
         InitializeComponent();
+        this.filterLocation = filterLocation;
         BindingContext = viewModel;
 
     }
@@ -70,9 +72,13 @@ public partial class MainPage : ContentPage
         while (isGettingLocation)
         {
             await MoveToMyLocation();
+            myLocationFilterd = await GetMyLocationWithFilter();
+            if (myLocationFilterd != null)
+            {
+                locations.Add(myLocationFilterd);
+                polyline.Add(myLocationFilterd);
+            }
 
-            locations.Add(myLocation);
-            polyline.Add(myLocation);
             await Task.Delay(2000);
 
         }
@@ -162,7 +168,20 @@ public partial class MainPage : ContentPage
 #if IOS
         request.RequestFullAccuracy = true;
 #endif
+        
         myLocation = await Geolocation.GetLocationAsync(request);
+
+        return myLocation;
+    }
+    
+    private async Task<Location> GetMyLocationWithFilter()
+    {
+        var request = new GeolocationRequest(GeolocationAccuracy.Best, TimeSpan.FromSeconds(10));
+#if IOS
+        request.RequestFullAccuracy = true;
+#endif
+        
+        myLocation = filterLocation.FilterAndReturnLocation(await Geolocation.GetLocationAsync(request));
 
         return myLocation;
     }

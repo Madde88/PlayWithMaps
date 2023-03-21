@@ -19,8 +19,7 @@
           "/Users/madde/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
-          "net7.0-ios",
-          "net7.0-maccatalyst"
+          "net7.0-ios"
         ],
         "sources": {
           "/Users/madde/Documents/Progress/Telerik_UI_for_NET_MAUI_3.0.0/Packages": {},
@@ -31,17 +30,6 @@
         "frameworks": {
           "net7.0-ios16.1": {
             "targetAlias": "net7.0-ios",
-            "projectReferences": {
-              "/Users/madde/Projects/PlayWithMaps/PlayWithMapsDb/PlayWithMapsDb.csproj": {
-                "projectPath": "/Users/madde/Projects/PlayWithMaps/PlayWithMapsDb/PlayWithMapsDb.csproj"
-              },
-              "/Users/madde/Projects/PlayWithMaps/PlayWithMapsShared/PlayWithMapsShared.csproj": {
-                "projectPath": "/Users/madde/Projects/PlayWithMaps/PlayWithMapsShared/PlayWithMapsShared.csproj"
-              }
-            }
-          },
-          "net7.0-maccatalyst16.1": {
-            "targetAlias": "net7.0-maccatalyst",
             "projectReferences": {
               "/Users/madde/Projects/PlayWithMaps/PlayWithMapsDb/PlayWithMapsDb.csproj": {
                 "projectPath": "/Users/madde/Projects/PlayWithMaps/PlayWithMapsDb/PlayWithMapsDb.csproj"
@@ -157,113 +145,10 @@
             }
           },
           "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
-        },
-        "net7.0-maccatalyst16.1": {
-          "targetAlias": "net7.0-maccatalyst",
-          "dependencies": {
-            "CommunityToolkit.Maui": {
-              "target": "Package",
-              "version": "[5.0.0, )"
-            },
-            "CommunityToolkit.Mvvm": {
-              "target": "Package",
-              "version": "[8.1.0, )"
-            },
-            "Geolocator.Plugin": {
-              "target": "Package",
-              "version": "[1.0.2, )"
-            },
-            "Microsoft.EntityFrameworkCore.Sqlite": {
-              "target": "Package",
-              "version": "[7.0.4, )"
-            },
-            "Microsoft.Extensions.Configuration": {
-              "target": "Package",
-              "version": "[7.0.0, )",
-              "autoReferenced": true
-            },
-            "Microsoft.Extensions.DependencyInjection": {
-              "target": "Package",
-              "version": "[7.0.0, )",
-              "autoReferenced": true
-            },
-            "Microsoft.Extensions.Logging": {
-              "target": "Package",
-              "version": "[7.0.0, )",
-              "autoReferenced": true
-            },
-            "Microsoft.Extensions.Logging.Abstractions": {
-              "target": "Package",
-              "version": "[7.0.0, )",
-              "autoReferenced": true
-            },
-            "Microsoft.Extensions.Logging.Debug": {
-              "target": "Package",
-              "version": "[7.0.0, )"
-            },
-            "Microsoft.Maui.Controls.Maps": {
-              "target": "Package",
-              "version": "[7.0.59, )"
-            },
-            "Microsoft.Maui.Graphics": {
-              "target": "Package",
-              "version": "[7.0.59, )",
-              "autoReferenced": true
-            },
-            "SQLitePCLRaw.bundle_green": {
-              "target": "Package",
-              "version": "[2.1.4, )"
-            },
-            "SQLitePCLRaw.core": {
-              "target": "Package",
-              "version": "[2.1.4, )"
-            },
-            "SQLitePCLRaw.provider.dynamic_cdecl": {
-              "target": "Package",
-              "version": "[2.1.4, )"
-            },
-            "SQLitePCLRaw.provider.sqlite3": {
-              "target": "Package",
-              "version": "[2.1.4, )"
-            }
-          },
-          "imports": [
-            "xamarinios10",
-            "net461",
-            "net462",
-            "net47",
-            "net471",
-            "net472",
-            "net48",
-            "net481"
-          ],
-          "assetTargetFallback": true,
-          "warn": true,
-          "frameworkReferences": {
-            "Microsoft.MacCatalyst": {
-              "privateAssets": "all"
-            },
-            "Microsoft.Maui.Controls": {
-              "privateAssets": "all"
-            },
-            "Microsoft.Maui.Core": {
-              "privateAssets": "all"
-            },
-            "Microsoft.Maui.Essentials": {
-              "privateAssets": "all"
-            },
-            "Microsoft.NETCore.App": {
-              "privateAssets": "all"
-            }
-          },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.202/RuntimeIdentifierGraph.json"
         }
       },
       "runtimes": {
         "iossimulator-x64": {
-          "#import": []
-        },
-        "maccatalyst-x64": {
           "#import": []
         }
       }

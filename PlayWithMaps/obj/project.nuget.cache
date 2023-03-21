@@ -1,6 +1,6 @@
 {
   "version": 2,
-  "dgSpecHash": "2cz2vAbOVTxduq1M9AfGv236wuboxmIDWabDAbWll4haq0JanNBUHGqt3Syl30aRNVUH4kI83K+qvZqKZa2+0Q==",
+  "dgSpecHash": "cQLVtoqsNV+drtMzJSIlOi0UcfsRyExSq7MjuE1aivkxMTZt0Ek+5mtCxaY+bFGlehbWRvqb+C1hXhcc2L6IkA==",
   "success": true,
   "projectFilePath": "/Users/madde/Projects/PlayWithMaps/PlayWithMaps/PlayWithMaps.csproj",
   "expectedPackageFiles": [
@@ -33,10 +33,8 @@
     "/Users/madde/.nuget/packages/sqlitepclraw.bundle_e_sqlite3/2.1.4/sqlitepclraw.bundle_e_sqlite3.2.1.4.nupkg.sha512",
     "/Users/madde/.nuget/packages/sqlitepclraw.bundle_green/2.1.4/sqlitepclraw.bundle_green.2.1.4.nupkg.sha512",
     "/Users/madde/.nuget/packages/sqlitepclraw.core/2.1.4/sqlitepclraw.core.2.1.4.nupkg.sha512",
-    "/Users/madde/.nuget/packages/sqlitepclraw.lib.e_sqlite3/2.1.4/sqlitepclraw.lib.e_sqlite3.2.1.4.nupkg.sha512",
     "/Users/madde/.nuget/packages/sqlitepclraw.lib.e_sqlite3.ios/2.1.4/sqlitepclraw.lib.e_sqlite3.ios.2.1.4.nupkg.sha512",
     "/Users/madde/.nuget/packages/sqlitepclraw.provider.dynamic_cdecl/2.1.4/sqlitepclraw.provider.dynamic_cdecl.2.1.4.nupkg.sha512",
-    "/Users/madde/.nuget/packages/sqlitepclraw.provider.e_sqlite3/2.1.4/sqlitepclraw.provider.e_sqlite3.2.1.4.nupkg.sha512",
     "/Users/madde/.nuget/packages/sqlitepclraw.provider.internal/2.1.4/sqlitepclraw.provider.internal.2.1.4.nupkg.sha512",
     "/Users/madde/.nuget/packages/sqlitepclraw.provider.sqlite3/2.1.4/sqlitepclraw.provider.sqlite3.2.1.4.nupkg.sha512",
     "/Users/madde/.nuget/packages/system.memory/4.5.3/system.memory.4.5.3.nupkg.sha512",
