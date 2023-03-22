@@ -2,6 +2,9 @@
 <ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PlayWithMaps.MainPage"
+             xmlns:local="clr-namespace:PlayWithMaps"
+             xmlns:models="clr-namespace:PlayWithMaps.Models;assembly=PlayWithMapsShared"
+             x:DataType="local:MainPage"
             xmlns:maps="clr-namespace:Microsoft.Maui.Controls.Maps;assembly=Microsoft.Maui.Controls.Maps">
 
     <ScrollView>
@@ -54,6 +57,23 @@
                 Clicked="GetLocation_Clicked"
                 HorizontalOptions="Center" Margin="0,10"/>
                 </HorizontalStackLayout>
+<ListView x:Name="LocationListView" ItemsSource="{Binding LocationListViewItems}" 
+          HorizontalOptions="FillAndExpand" BackgroundColor="Chartreuse" WidthRequest="350" MinimumHeightRequest="300"
+          ItemSelected="LocationListView_OnItemSelected">
+    <ListView.Header>
+        <StackLayout BackgroundColor="LightGray">
+            <Label Margin="10,0,0,0"
+                   Text="Saved Traces"
+                   FontSize="12"
+                   FontAttributes="Bold" />
+        </StackLayout>
+    </ListView.Header>
+    <ListView.ItemTemplate>
+        <DataTemplate x:DataType="models:PositionRec">
+            <TextCell Text="{Binding Name}"/>
+        </DataTemplate>
+    </ListView.ItemTemplate>
+</ListView> 
             </VerticalStackLayout>
     </ScrollView>
 

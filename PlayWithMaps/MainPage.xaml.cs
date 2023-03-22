@@ -14,6 +14,7 @@ public partial class MainPage : ContentPage
     Stopwatch stopWatch = new();
     int PinCount;
     ImageSource customPinImage = ImageSource.FromFile("pin.png");
+    public ObservableCollection<PositionRec> LocationListViewItems { get; } = new();
 
     private MainPageViewModel viewModel => BindingContext as MainPageViewModel;
     private IFilterLocation filterLocation;
@@ -22,6 +23,7 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         this.filterLocation = filterLocation;
         BindingContext = viewModel;
+        LocationListView.ItemsSource = LocationListViewItems;
 
     }
     protected async override void OnAppearing()
@@ -122,43 +124,9 @@ public partial class MainPage : ContentPage
         var positionRecsList = await viewModel.GetAllPositionRecs();
         if (positionRecsList == null)
             return;
-
-        foreach (var positionRec in positionRecsList)
-        {
-            var PolyColor = positionRec.TraceType == TraceType.Trace ? Colors.Red : Colors.Blue;
-
-            Polyline polyline = new Polyline
-            {
-                StrokeColor = PolyColor,
-                StrokeWidth = 2
-            };
-            var lines = positionRec?.Positions?.Where(a => a.Type == PositionType.PolyLine);
-            foreach (var line in lines)
-            {
-                polyline.Add(new Location(line.Lat, line.Long));
-            }
-
-            var pinns = positionRec?.Positions?.Where(a => a.Type == PositionType.Pin);
-
-            foreach (var pin in pinns)
-            {
-                var pinmap = new CustomPin()
-                {
-                    Location = new Location(pin.Lat, pin.Long),
-                    Label = "Apport",
-                    ImageSource = customPinImage
-                };
-                mappy.Pins.Add(pinmap);
-            }
-            mappy.MapElements.Add(polyline);
-
-        }
-        var firstPosition = positionRecsList?.FirstOrDefault()?.Positions?.FirstOrDefault();
-        if (firstPosition == null)
-            return;
-
-        mappy.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(firstPosition.Lat, firstPosition.Long), Distance.FromMeters(1)));
-
+        
+        LocationListViewItems.Clear();
+        positionRecsList.ForEach(a => LocationListViewItems.Add(a));
 
     }
 
@@ -228,6 +196,45 @@ public partial class MainPage : ContentPage
     {
         var myLocation = await GetMyLocation();
         mappy.MoveToRegion(MapSpan.FromCenterAndRadius(myLocation, Distance.FromMeters(10)));
+    }
+
+    private void LocationListView_OnItemSelected(object sender, SelectedItemChangedEventArgs e)
+    {
+        var positionRec = (PositionRec)e.SelectedItem;
+        
+            var PolyColor = positionRec.TraceType == TraceType.Trace ? Colors.Red : Colors.Blue;
+
+            Polyline polyline = new Polyline
+            {
+                StrokeColor = PolyColor,
+                StrokeWidth = 2
+            };
+            var lines = positionRec?.Positions?.Where(a => a.Type == PositionType.PolyLine);
+            foreach (var line in lines)
+            {
+                polyline.Add(new Location(line.Lat, line.Long));
+            }
+
+            var pinns = positionRec?.Positions?.Where(a => a.Type == PositionType.Pin);
+
+            foreach (var pin in pinns)
+            {
+                var pinmap = new CustomPin()
+                {
+                    Location = new Location(pin.Lat, pin.Long),
+                    Label = "Apport",
+                    ImageSource = customPinImage
+                };
+                mappy.Pins.Add(pinmap);
+            }
+            mappy.MapElements.Add(polyline);
+            
+        var firstPosition = positionRec?.Positions?.FirstOrDefault();
+        if (firstPosition == null)
+            return;
+        
+        mappy.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(firstPosition.Lat, firstPosition.Long), Distance.FromMeters(1)));
+
     }
 }
 
