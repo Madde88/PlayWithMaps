@@ -11,70 +11,75 @@
         <VerticalStackLayout
             Margin="10">
 
-<maps:Map x:Name="mappy" MapType="Satellite" IsShowingUser="True" IsScrollEnabled="True" IsZoomEnabled="True" HorizontalOptions="FillAndExpand" HeightRequest="400" />
-<HorizontalStackLayout>
-            <Button
+            <maps:Map x:Name="mappy" MapType="Satellite" IsShowingUser="True" IsScrollEnabled="True" IsZoomEnabled="True" HorizontalOptions="FillAndExpand" HeightRequest="400" />
+            <HorizontalStackLayout>
+                <Button
                 x:Name="RecordLocation"
                 Text="Start Record Location"
                 Clicked="RecordLocation_Clicked"
                 HorizontalOptions="Center" Margin="0,10"/>
-                        <Button
+                <Button
                 x:Name="GetReTraceLocation"
                 Text="Start ReTrace Location"
                 Clicked="GetReTraceLocation_Clicked"
                 HorizontalOptions="Center" Margin="0,10"/>
-</HorizontalStackLayout>
-             <HorizontalStackLayout>  
-            <Button
+            </HorizontalStackLayout>
+            <HorizontalStackLayout>
+                <Button
                 x:Name="CancelGetLocation"
                 Text="Cancel Record"
                 Clicked="CancelGetLocation_Clicked"
                 HorizontalOptions="Center" Margin="0,10"/>
 
-        
-            <Button
+
+                <Button
                 x:Name="GetSavedLocations"
                 Text="Get Last Saved Record"
                 Clicked="GetSavedLocations_Clicked"
                 HorizontalOptions="Center" Margin="0,10"/>
-</HorizontalStackLayout>
+            </HorizontalStackLayout>
             <HorizontalStackLayout>
-                        <Button
+                <Button
                 x:Name="Clear"
                 Text="Clear Map"
                 Clicked="Clear_Clicked"
                 HorizontalOptions="Center" Margin="0,10"/>
 
-        
-                          <Button
+
+                <Button
                 x:Name="AddPin"
                 Text="Add Pin"
                 Clicked="AddPin_Clicked"
                 HorizontalOptions="Center" Margin="0,10"/>
-                                          <Button
+                <Button
                 x:Name="GetLocation"
                 Text="Get Location"
                 Clicked="GetLocation_Clicked"
                 HorizontalOptions="Center" Margin="0,10"/>
-                </HorizontalStackLayout>
-<ListView x:Name="LocationListView" ItemsSource="{Binding LocationListViewItems}" 
-          HorizontalOptions="FillAndExpand" BackgroundColor="Chartreuse" WidthRequest="350" MinimumHeightRequest="300"
+            </HorizontalStackLayout>
+            <ListView x:Name="LocationListView" ItemsSource="{Binding LocationListViewItems}" 
+          HorizontalOptions="FillAndExpand" BackgroundColor="LightSeaGreen" WidthRequest="350" MinimumHeightRequest="300"
           ItemSelected="LocationListView_OnItemSelected">
-    <ListView.Header>
-        <StackLayout BackgroundColor="LightGray">
-            <Label Margin="10,0,0,0"
+                <ListView.Header>
+                    <StackLayout BackgroundColor="LightGray">
+                        <Label Margin="10,0,0,0"
                    Text="Saved Traces"
                    FontSize="12"
                    FontAttributes="Bold" />
-        </StackLayout>
-    </ListView.Header>
-    <ListView.ItemTemplate>
-        <DataTemplate x:DataType="models:PositionRec">
-            <TextCell Text="{Binding Name}"/>
-        </DataTemplate>
-    </ListView.ItemTemplate>
-</ListView> 
-            </VerticalStackLayout>
+                    </StackLayout>
+                </ListView.Header>
+                <ListView.ItemTemplate>
+                    <DataTemplate x:DataType="models:PositionRec">
+                        <TextCell Text="{Binding Name}">
+                            <TextCell.ContextActions>
+                                <MenuItem Text="Delete" Clicked="DeleteTrace_Clicked" />
+                            </TextCell.ContextActions>
+
+                        </TextCell>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </VerticalStackLayout>
     </ScrollView>
 
 </ContentPage>

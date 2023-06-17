@@ -56,6 +56,18 @@ public partial class MainPageViewModel
         }
         
     }
+
+    public async Task DeletePositionRecording(int id)
+    {
+        try
+        {
+            await positionRecRepository.DeleteItem(id);
+        }
+        catch (Exception ex)
+        {
+
+        }
+    }
 }
 
 

@@ -1,10 +1,14 @@
 ﻿using System.Diagnostics;
+using GeolocatorPlugin;
+using GeolocatorPlugin.Abstractions;
+using Microsoft.Maui.Devices.Sensors;
 using PlayWithMaps.CustomControls;
 
 namespace PlayWithMaps;
 
 public partial class MainPage : ContentPage
 {
+    Polyline polyline;
     Location myLocation;
     Location myLocationFilterd;
     List<Location> locations = new();
@@ -30,7 +34,7 @@ public partial class MainPage : ContentPage
     {
         await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
         myLocation = await GetMyLocation();
-        mappy.MoveToRegion(MapSpan.FromCenterAndRadius(myLocation, Distance.FromMeters(10)));
+        MoveToMyLocation(myLocation);
     }
 
     async void RecordLocation_Clicked(System.Object sender, System.EventArgs e)
@@ -42,8 +46,8 @@ public partial class MainPage : ContentPage
     private async Task TrackLocation(TraceType traceType)
     {
         ClearMap();
-        stopWatch.Start();
-        Polyline polyline;
+        //stopWatch.Start();
+        
         switch (traceType)
         {
             case TraceType.Trace:
@@ -71,25 +75,99 @@ public partial class MainPage : ContentPage
 
         isGettingLocation = true;
 
-        while (isGettingLocation)
+        //while (isGettingLocation)
+        //{
+        //    await MoveToMyLocation();
+        //    myLocationFilterd = await GetMyLocationWithFilter();
+        //    if (myLocationFilterd != null)
+        //    {
+        //        locations.Add(myLocationFilterd);
+        //        polyline.Add(myLocationFilterd);
+        //    }
+
+        //    await Task.Delay(2000);
+
+        //}
+        await StartListening();
+    }
+
+    async Task StartListening()
+    {
+        if (CrossGeolocator.Current.IsListening)
+            return;
+
+        CrossGeolocator.Current.DesiredAccuracy = 1;
+
+        await CrossGeolocator.Current.StartListeningAsync(TimeSpan.FromSeconds(5), 1, true, new GeolocatorPlugin.Abstractions.ListenerSettings
         {
-            await MoveToMyLocation();
-            myLocationFilterd = await GetMyLocationWithFilter();
-            if (myLocationFilterd != null)
-            {
-                locations.Add(myLocationFilterd);
-                polyline.Add(myLocationFilterd);
-            }
+            ActivityType = GeolocatorPlugin.Abstractions.ActivityType.Fitness,
+            AllowBackgroundUpdates = true,
+            DeferLocationUpdates = false,
+            ListenForSignificantChanges = false,
+            PauseLocationUpdatesAutomatically = false
+        });
 
-            await Task.Delay(2000);
+        CrossGeolocator.Current.PositionChanged += PositionChanged;
+        CrossGeolocator.Current.PositionError += PositionError;
+    }
 
+    private void PositionChanged(object sender, PositionEventArgs e)
+    {
+        MainThread.BeginInvokeOnMainThread(() =>
+        {
+
+            //If updating the UI, ensure you invoke on main thread
+            var position = e.Position;
+        var location = MapLocationPosition(position);
+
+        MoveToMyLocation(location);
+
+        myLocationFilterd = filterLocation.FilterAndReturnLocation(location);
+
+        if (myLocationFilterd != null)
+        {
+            locations.Add(location);
+            polyline.Add(location);
+        
         }
+        });
+    }
+
+    private Location MapLocationPosition(GeolocatorPlugin.Abstractions.Position position)
+    {
+        var location = new Location(position.Latitude, position.Longitude);
+        location.Accuracy = position.Accuracy;
+        location.Timestamp = position.Timestamp;
+        location.Speed = position.Speed;
+        location.Accuracy = position.Accuracy;
+        location.Altitude = position.Altitude;
+
+        return location;
+    }
+
+    private void PositionError(object sender, PositionErrorEventArgs e)
+    {
+        Debug.WriteLine(e.Error);
+        //Handle event here for errors
+    }
+
+    async Task StopListening()
+    {
+        if (!CrossGeolocator.Current.IsListening)
+            return;
+
+        await CrossGeolocator.Current.StopListeningAsync();
+
+        CrossGeolocator.Current.PositionChanged -= PositionChanged;
+        CrossGeolocator.Current.PositionError -= PositionError;
     }
 
     async void CancelGetLocation_Clicked(System.Object sender, System.EventArgs e)
     {
         isGettingLocation = false;
-        stopWatch.Stop();
+        //stopWatch.Stop();
+        await StopListening();
+
         var result = await DisplayAlert("Vill Du spara?", "Vill du spara din data i databasen?", "JA", "Avbryt");
         if (result)
         {
@@ -189,12 +267,12 @@ public partial class MainPage : ContentPage
 
     async void GetLocation_Clicked(System.Object sender, System.EventArgs e)
     {
-        await MoveToMyLocation();
+        var myLocation = await GetMyLocation();
+        MoveToMyLocation(myLocation);
     }
 
-    private async Task MoveToMyLocation()
+    private void MoveToMyLocation(Location myLocation)
     {
-        var myLocation = await GetMyLocation();
         mappy.MoveToRegion(MapSpan.FromCenterAndRadius(myLocation, Distance.FromMeters(10)));
     }
 
@@ -235,6 +313,19 @@ public partial class MainPage : ContentPage
         
         mappy.MoveToRegion(MapSpan.FromCenterAndRadius(new Location(firstPosition.Lat, firstPosition.Long), Distance.FromMeters(1)));
 
+    }
+
+    async void DeleteTrace_Clicked(System.Object sender, System.EventArgs e)
+    {
+        if (sender is MenuItem menuItem)
+        {
+            if (menuItem.BindingContext is PositionRec position)
+            {
+                await viewModel.DeletePositionRecording(position.Id);
+                LocationListViewItems.Remove(position);
+
+            }
+        }
     }
 }
 
